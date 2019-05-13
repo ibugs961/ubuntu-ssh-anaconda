@@ -20,16 +20,19 @@ RUN apt-get install -y wget bzip2 && \
     echo "export PATH=/opt/conda/bin:$PATH" > /etc/profile.d/conda.sh
     
 ENV PATH /opt/conda/bin:$PATH
-RUN pip install --upgrade pip
 
-# prophet
-RUN apt-get install -y g++ && \
-    mkdir ~/.pip && \
+RUN mkdir ~/.pip && \
     echo "[global]" > ~/.pip/pip.conf && \
     echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf && \
     echo "[install]" >> ~/.pip/pip.conf && \
     echo "trusted-host=mirrors.aliyun.com" >> ~/.pip/pip.conf && \
-    pip install pystan==2.18.0.0 fbprophet==0.4.post2 tensorflow==1.3.0 keras==2.0.8 lightgbm==2.2.2
+    pip install --upgrade pip
+
+# prophet
+RUN apt-get install -y g++ && \
+    pip install pystan==2.18.0.0
+
+RUN pip install fbprophet==0.4.post2 tensorflow==1.3.0 keras==2.0.8 lightgbm==2.2.2
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
