@@ -23,7 +23,7 @@ ENV PATH /opt/conda/bin:$PATH
 RUN pip install --upgrade pip
 
 # prophet
-RUN apt-get install g++ && \
+RUN apt-get install -y g++ && \
     mkdir ~/.pip && \
     echo "[global]" > ~/.pip/pip.conf && \
     echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf && \
